@@ -1,0 +1,41 @@
+{% extends 'base_generic.html' %}
+{% load crispy_forms_tags %}
+
+{% block body %}
+<div class="row">
+  <div class="col-md-10"></div>
+  <div class="col-md-2"><a class="btn btn-success" href="{% url 'author-add' %}">Add</a></div>
+</div>
+{% if employee_list %}
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Dob</th>
+        <th>Email</th>
+        <th>Department</th>
+        <th>Designation</th>
+        <th>Salary</th>
+        <th>Address</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for item in employee_list %}
+      <tr>
+        <td>{{ item.name }}</td>
+        <td>{{ item.dob }}</td>
+        <td>{{ item.email }}</td>
+        <td>{{ item.department }}</td>
+        <td>{{ item.designation }}</td>
+        <td>{{ item.salary }}</td>
+        <td>{{ item.address }}</td>
+        <td><a class="btn btn-success" href="{% url 'author-update' item.pk %}">Edit</a> | <a class="btn btn-danger" href="{% url 'author-delete' item.pk %}" >Delete</a></td>
+      </tr>
+    {% endfor %}  
+    </tbody>
+  </table>
+{% else %} 
+<div class="alert alert-danger">Sorry no record found. Kindly add Employee.</div>
+{% endif %} 
+{% endblock %}
